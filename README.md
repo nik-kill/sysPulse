@@ -52,3 +52,10 @@ Visual Studio is not required to run the built application. To build without Vis
 - **v0.2.0** — Windows CPU and memory collector with console verification (complete)
 - **v0.3.0** — Background polling and live dashboard (current)
 - **v0.4.0** — Error handling, cleanup, and documentation
+
+
+<img width="658" height="310" alt="image" src="https://github.com/user-attachments/assets/429ff926-b355-4030-b639-ec42e4a124fb" />
+<img width="875" height="385" alt="image" src="https://github.com/user-attachments/assets/fa3c84cf-8911-4e4e-8ab4-e8e4e2ed7e3e" />
+<img width="1269" height="735" alt="image" src="https://github.com/user-attachments/assets/e26e6ffe-f0c5-4374-8d5f-4bad11299847" />
+
+

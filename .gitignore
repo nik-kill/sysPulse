@@ -1,0 +1,19 @@
+# Build output
+/build/
+/build-cmd/
+/build-vs2026/
+
+# Visual Studio and IDE files
+/.vs/
+*.user
+*.suo
+
+# Dear ImGui runtime state
+imgui.ini
+
+# CMake generated files
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json

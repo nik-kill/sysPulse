@@ -58,4 +58,5 @@ Visual Studio is not required to run the built application. To build without Vis
 <img width="875" height="385" alt="image" src="https://github.com/user-attachments/assets/fa3c84cf-8911-4e4e-8ab4-e8e4e2ed7e3e" />
 <img width="1269" height="735" alt="image" src="https://github.com/user-attachments/assets/e26e6ffe-f0c5-4374-8d5f-4bad11299847" />
 
+<img width="1277" height="748" alt="image" src="https://github.com/user-attachments/assets/e84736fa-129c-4b89-ab6f-02c8a8552e3d" />
 

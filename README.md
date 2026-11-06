@@ -2,11 +2,11 @@
 
 SysPulse is a lightweight Windows desktop system monitor built with C++20 and Dear ImGui. Development is incremental; each version is compiled and verified before the next feature is started.
 
-## v0.2.0: Windows System Collector
+## v0.3.0: Live ImGui Dashboard
 
-The current milestone adds a Windows collector using `GetSystemTimes` for CPU utilization and `GlobalMemoryStatusEx` for physical/pagefile memory statistics. The `syspulse_collector` console program prints updated values every second.
+The current milestone connects the Windows collector to the ImGui application through a background `std::jthread`. The dashboard displays live CPU and memory gauges, pagefile information, and rolling history plots for the last 120 samples.
 
-The ImGui window from v0.1.0 remains available. The live dashboard and background queue are planned for v0.3.0.
+Snapshots are passed to the UI through a mutex-protected bounded queue. The UI uses non-blocking reads so rendering never waits for the collector.
 
 ## Prerequisites
 
@@ -39,14 +39,16 @@ Visual Studio is not required to run the built application. To build without Vis
 ## Project Layout
 
 - `src/main.cpp` — GLFW window and Dear ImGui render loop
+- `ui/dashboard_ui.*` — live metrics, gauges, and history plots
 - `src/collector_console.cpp` — v0.2.0 collector verification program
 - `include/syspulse/` — shared metric and collector interfaces
+- `include/syspulse/poller.hpp` and `src/poller.cpp` — background telemetry polling
 - `platforms/windows_collector.*` — Win32 CPU and memory collection
 - `tests/` — planned unit tests
 
 ## Version Tracker
 
 - **v0.1.0** — Project setup and blank Dear ImGui window (complete)
-- **v0.2.0** — Windows CPU and memory collector with console verification (current)
-- **v0.3.0** — Background polling and live dashboard
+- **v0.2.0** — Windows CPU and memory collector with console verification (complete)
+- **v0.3.0** — Background polling and live dashboard (current)
 - **v0.4.0** — Error handling, cleanup, and documentation

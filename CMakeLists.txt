@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.20)
 
-project(SysPulse VERSION 0.2.0 LANGUAGES CXX)
+project(SysPulse VERSION 0.3.0 LANGUAGES CXX)
 
 if(MSVC)
 	set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
@@ -49,13 +49,20 @@ target_compile_features(imgui PUBLIC cxx_std_20)
 
 find_package(OpenGL REQUIRED)
 
-add_executable(syspulse src/main.cpp)
+add_executable(syspulse
+	src/main.cpp
+	ui/dashboard_ui.cpp
+)
+target_include_directories(syspulse PRIVATE
+	${CMAKE_CURRENT_SOURCE_DIR}/ui
+)
 target_compile_features(syspulse PRIVATE cxx_std_20)
 target_link_libraries(syspulse PRIVATE imgui OpenGL::GL)
 
 add_library(syspulse_core STATIC
 	src/collector.cpp
 	src/factory.cpp
+	src/poller.cpp
 	platforms/windows_collector.cpp
 )
 target_include_directories(syspulse_core
@@ -63,6 +70,7 @@ target_include_directories(syspulse_core
 	PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/platforms
 )
 target_compile_features(syspulse_core PUBLIC cxx_std_20)
+target_link_libraries(syspulse PRIVATE syspulse_core)
 
 add_executable(syspulse_collector src/collector_console.cpp)
 target_include_directories(syspulse_collector PRIVATE

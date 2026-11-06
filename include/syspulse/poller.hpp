@@ -25,6 +25,7 @@ public:
 	void start();
 	void stop();
 	std::optional<SystemSnapshot> next_snapshot();
+	std::optional<SystemSnapshot> try_next_snapshot();
 
 private:
 	void run(std::stop_token token);

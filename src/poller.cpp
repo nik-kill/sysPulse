@@ -13,6 +13,7 @@ void Poller::stop() {
 	if (worker_.joinable()) worker_.request_stop();
 }
 std::optional<SystemSnapshot> Poller::next_snapshot() { return queue_.wait_pop(); }
+std::optional<SystemSnapshot> Poller::try_next_snapshot() { return queue_.try_pop(); }
 void Poller::run(std::stop_token token) {
 	while (!token.stop_requested()) {
 		queue_.push(collector_->collect_snapshot());

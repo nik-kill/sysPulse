@@ -1,6 +1,8 @@
 #include "imgui.h"
 #include "backends/imgui_impl_glfw.h"
 #include "backends/imgui_impl_opengl3.h"
+#include "dashboard_ui.hpp"
+#include "syspulse/poller.hpp"
 
 #include <GLFW/glfw3.h>
 
@@ -43,6 +45,10 @@ int main() {
 	ImGui_ImplGlfw_InitForOpenGL(window, true);
 	ImGui_ImplOpenGL3_Init("#version 330");
 
+	syspulse::Poller poller(syspulse::create_system_collector());
+	poller.start();
+	syspulse::DashboardUI dashboard(poller);
+
 	while (!glfwWindowShouldClose(window)) {
 		glfwPollEvents();
 
@@ -50,10 +56,7 @@ int main() {
 		ImGui_ImplGlfw_NewFrame();
 		ImGui::NewFrame();
 
-		ImGui::Begin("SysPulse");
-		ImGui::TextUnformatted("Hello, SysPulse!");
-		ImGui::TextUnformatted("Windows desktop monitor - v0.1.0");
-		ImGui::End();
+		dashboard.render();
 
 		ImGui::Render();
 		int display_width = 0;
@@ -66,6 +69,7 @@ int main() {
 		glfwSwapBuffers(window);
 	}
 
+	poller.stop();
 	ImGui_ImplOpenGL3_Shutdown();
 	ImGui_ImplGlfw_Shutdown();
 	ImGui::DestroyContext();
